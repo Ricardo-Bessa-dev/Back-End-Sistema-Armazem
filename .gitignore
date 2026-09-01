@@ -1,0 +1,17 @@
+# Maven
+target/
+
+# Compiled class files (caso algum escape do target/)
+*.class
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Logs
+*.log
+
+# Sistema operacional
+.DS_Store
