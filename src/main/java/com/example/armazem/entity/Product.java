@@ -8,6 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
 
+// Entidade JPA: representa a tabela products
+
 @Entity
 @Table(name = "products")
 public class Product{
