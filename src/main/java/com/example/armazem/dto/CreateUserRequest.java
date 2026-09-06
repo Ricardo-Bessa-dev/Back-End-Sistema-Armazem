@@ -12,6 +12,7 @@ public record CreateUserRequest(
 
         @NotBlank
         @Size(max = 60)
+        String login,
 
         @NotBlank
         String password //Senha antes de passar pelo BCrypt e virar hash
