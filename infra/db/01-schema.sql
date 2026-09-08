@@ -1,18 +1,16 @@
--- ============================================================
 -- 01-schema.sql — Armazém (Redes II)
 -- Cria as três tabelas do sistema: products, users, sessions.
 -- Idempotente: pode rodar mais de uma vez sem erro.
--- ============================================================
 
 CREATE DATABASE IF NOT EXISTS ArmazemRedes
     CHARACTER SET utf8mb4
-    COLLATE utf8mb4_unicode_ci;   -- utf8mb4 aguenta acentos e emoji sem quebrar
+    COLLATE utf8mb4_unicode_ci;
 
 USE ArmazemRedes;
 
--- ---------------------------------------------------------
+
 -- products
--- ---------------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS products (
     id       BIGINT        NOT NULL AUTO_INCREMENT,
     name     VARCHAR(120)  NOT NULL,
@@ -23,9 +21,8 @@ CREATE TABLE IF NOT EXISTS products (
     CONSTRAINT chk_quantity_nao_negativa CHECK (quantity >= 0)
 ) ENGINE=InnoDB;
 
--- ---------------------------------------------------------
 -- users
--- ---------------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS users (
     id            BIGINT       NOT NULL AUTO_INCREMENT,
     name          VARCHAR(120) NOT NULL,
@@ -37,9 +34,8 @@ CREATE TABLE IF NOT EXISTS users (
     CONSTRAINT uq_users_login UNIQUE (login)
 ) ENGINE=InnoDB;
 
--- ---------------------------------------------------------
 -- sessions
--- ---------------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS sessions (
     id         BIGINT      NOT NULL AUTO_INCREMENT,
     user_id    BIGINT      NOT NULL,

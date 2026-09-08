@@ -1,0 +1,38 @@
+# ============================================================
+# armazem-api.service — Armazém (Redes II)
+# Unidade systemd da VM2 (192.168.122.12): mantém a API Spring Boot
+# rodando como serviço e a religa no boot.
+#
+# Instalar em /etc/systemd/system/armazem-api.service e ativar com:
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now armazem-api
+#   sudo journalctl -u armazem-api -f      # acompanhar o log
+#
+# O 'enable' não é detalhe: sem ele a API não sobe sozinha ao ligar a VM.
+# ============================================================
+
+[Unit]
+Description=API Armazem (Spring Boot)
+# Só inicia depois que a rede estiver de pé, senão a conexão com a VM3 falha
+After=network.target
+
+[Service]
+# Usuário sem privilégios, criado com:
+#   sudo useradd -r -s /usr/sbin/nologin armazem
+User=armazem
+WorkingDirectory=/opt/armazem
+
+# A senha do banco entra aqui, fora do Git.
+# Deve ser a mesma definida em infra/db/02-usuario.sql na VM3.
+# Como este arquivo é versionado, substitua SENHA_AQUI apenas na VM2 e
+# proteja o arquivo instalado:  sudo chmod 600 /etc/systemd/system/armazem-api.service
+Environment="DB_PASSWORD=SENHA_AQUI"
+
+ExecStart=/usr/bin/java -jar /opt/armazem/armazem-0.0.1-SNAPSHOT.jar
+
+# Se a aplicação morrer por erro, o systemd a reinicia
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

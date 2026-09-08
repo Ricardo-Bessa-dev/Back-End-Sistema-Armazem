@@ -15,3 +15,7 @@ target/
 
 # Sistema operacional
 .DS_Store
+
+# Arquivos com credenciais reais
+*.local
+.env
