@@ -1,7 +1,5 @@
 -- 01-schema.sql — Armazém (Redes II)
 -- Cria as três tabelas do sistema: products, users, sessions.
--- Idempotente: pode rodar mais de uma vez sem erro.
-
 CREATE DATABASE IF NOT EXISTS ArmazemRedes
     CHARACTER SET utf8mb4
     COLLATE utf8mb4_unicode_ci;
